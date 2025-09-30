@@ -3,6 +3,7 @@ package com.dipak;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class BankingApp {
@@ -17,6 +18,7 @@ public class BankingApp {
             Scanner sc = new Scanner(System.in);
             User user = new User(connection, sc);
             Accounts accounts = new Accounts(connection, sc);
+            AccountManager accountManager = new AccountManager(connection, sc);
 
             String email;
             long account_number;
@@ -63,6 +65,25 @@ public class BankingApp {
                                 System.out.println("5. Log Out");
                                 System.out.println("Enter your choice: ");
                                 choice2 = sc.nextInt();
+                                switch (choice2) {
+                                    case 1:
+                                        accountManager.debit_money(account_number);
+                                        break;
+                                    case 2:
+                                        accountManager.credit_money(account_number);
+                                        break;
+                                    case 3:
+                                        accountManager.transfer_money(account_number);
+                                        break;
+                                    case 4:
+                                        accountManager.getBalance(account_number);
+                                        break;
+                                    case 5:
+                                        break;
+                                    default:
+                                        System.out.println("Enter Valid Choice!");
+                                        break;
+                                }
                             }
 
                         }
@@ -78,7 +99,7 @@ public class BankingApp {
                         break;
                 }
             }
-        }catch(SQLException e) {
+        }catch (SQLException e){
             e.printStackTrace();
         }
     }

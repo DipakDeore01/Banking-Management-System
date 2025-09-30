@@ -35,7 +35,7 @@ public class User {
             preparedStatement.setString(3, password);
             int affectedRows = preparedStatement.executeUpdate();
             if (affectedRows > 0) {
-                System.out.println("Registration Successfull!");
+                System.out.println("Registration Successful!");
             } else {
                 System.out.println("Registration Failed!");
             }
